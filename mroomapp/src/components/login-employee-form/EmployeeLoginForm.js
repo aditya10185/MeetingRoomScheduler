@@ -10,10 +10,9 @@ import {
     // FormText
 } from 'reactstrap';
 
-// import {userLogin} from '../../actions/AuthActions';
+import {userLogin} from '../../actions/AuthActions';
 
 import {loginUser} from '../../services';
-import { USER_LOGIN } from '../../actions/ActionTypes';
 
 class EmployeeLogin extends Component {
     constructor(props) {
@@ -40,12 +39,9 @@ class EmployeeLogin extends Component {
 
     handleSubmit(e) {
         loginUser(this.state.email, this.state.password).then(res => {
-            console.log(res.data);
-            console.log(this.props)
-            this.props.userLogin({
-                accessToken: res.data.token, 
-                user:res.data.user
-            });
+            this.props.userLogin(res.data.token, res.data.user);
+            // console.log(this.props);
+            this.props.modal();
         }).catch(err => {
             this.setState({
                 error: true,
@@ -73,7 +69,9 @@ class EmployeeLogin extends Component {
                     <Label for="password">Enter password:</Label>
                     <Input type="password" id="password" placeholder="Eg. password" required value={this.state.password} onChange={(e) => this.handlePasswordChange(e)}></Input>
                 </FormGroup>
-                <Button outline color="danger" onClick={() => this.handleSubmit()}>Login</Button>
+                <div className="text-center">
+                    <Button color="primary" block onClick={() => this.handleSubmit()} className="mr-1">Login</Button>
+                </div>
             </Form>
         );
     }
@@ -83,7 +81,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    userLogin: (payload) => dispatch({type: USER_LOGIN, payload: payload})
+    userLogin: (accessToken, email) => dispatch(userLogin(accessToken, email))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeLogin);

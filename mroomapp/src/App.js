@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
 import Home from './views/home/Home';
 import './App.scss';
 import Navbar from './components/navbar/Navbar';
-import CreateEmployee from './views/create-employee/CreateEmployee';
-import EmployeeLogin from './views/employee-login/EmployeeLogin';
 import { userLogin } from './actions/AuthActions';
 
-
+library.add(faUserCircle);
 
 class App extends Component {
 
@@ -19,8 +19,6 @@ class App extends Component {
       <Router>
         <div> 
           <Route path="/" exact component={Home}/>
-          <Route path="/create-employee" exact component={CreateEmployee}/>
-          <Route path="/login-employee" exact component={EmployeeLogin}/>
         </div> 
       </Router>
       </div>

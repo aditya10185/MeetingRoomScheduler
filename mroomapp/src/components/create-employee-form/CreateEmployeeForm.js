@@ -70,7 +70,8 @@ export default class CreateEmployeeForm extends Component {
         }
 
         createEmployee(employee).then(res => {
-            console.log(res)
+            console.log(res);
+            this.props.modal();
         }).catch(err => {
             console.log(err)
         })
