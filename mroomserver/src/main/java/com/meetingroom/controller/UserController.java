@@ -1,6 +1,5 @@
 package com.meetingroom.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,36 +18,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meetingroom.model.User;
-import com.meetingroom.repository.UserRepository;
+import com.meetingroom.service.UserService;
 import com.meetingroom.util.Passwords;
 
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
+	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 		public static final Logger logger = LoggerFactory.getLogger(UserController.class);
 		
 		@RequestMapping
 		public @ResponseBody ResponseEntity<List<User>> getAllUsers() {
 			long startTime = System.currentTimeMillis();
-			List<User> users = new ArrayList<User>();
-			try {
-				userRepository.findAll().forEach(users::add);
-				long endTime = System.currentTimeMillis();
-				long timeElapsed = endTime - startTime;
-				logger.info("Completed getting all users in "+ timeElapsed + "ms");
-				return new ResponseEntity<List<User>>(users, HttpStatus.ACCEPTED);
-			} catch(Exception e) {
-				e.printStackTrace();
-				logger.debug(e.getMessage());
-				long endTime = System.currentTimeMillis();
-				long timeElapsed = endTime - startTime;
-				logger.info("Completed getting all users in "+ timeElapsed + "ms");
-				return new ResponseEntity<List<User>>(users, HttpStatus.BAD_REQUEST);
-			}
+			List<User> users = userService.getAllUsers();
+			long endTime = System.currentTimeMillis();
+			logger.info("Got all users in " + (endTime - startTime) + " ms" );
+			return (users != null) ? new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.ACCEPTED)
+									: new ResponseEntity<List<User>>(HttpStatus.BAD_REQUEST);
 		}
 		
 		@PostMapping
@@ -61,10 +51,7 @@ public class UserController {
 				String contactNo = payload.get("contactNo").toString();
 				String email = payload.get("email").toString();
 				User newUser = new User(firstName, lastName, email, contactNo, password);
-				userRepository.save(newUser);
-				Map<String, Object> response = new HashMap<>();
-				response.put("Success", true);
-				response.put("User", newUser.toString());
+				Map<String, Object> response = userService.createUser(newUser);
 				long endTime = System.currentTimeMillis();
 				long timeElapased = endTime - startTime;
 				logger.info("Completed creating new user in " + timeElapased + "ms");
@@ -73,7 +60,7 @@ public class UserController {
 				dive.printStackTrace();
 				logger.debug(dive.getMessage());
 				Map<String, Object> error = new HashMap<>();
-				error.put("error", "Email already present in database");
+				error.put("error", "An user with the same email address already exists.");
 				long endTime = System.currentTimeMillis();
 				long timeElapased = endTime - startTime;
 				logger.info("Failed creating new user in " + timeElapased + "ms");

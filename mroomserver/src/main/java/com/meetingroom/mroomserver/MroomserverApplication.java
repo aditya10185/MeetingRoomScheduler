@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = {"com.meetingroom.controller", "com.meetingroom.model", "com.meetingroom.repository", "com.meetingroom.util"})
+@SpringBootApplication(scanBasePackages = {"com.meetingroom.controller", "com.meetingroom.service", "com.meetingroom.model", "com.meetingroom.repository", "com.meetingroom.util"})
 @EntityScan("com.meetingroom.model")
 @EnableJpaRepositories("com.meetingroom.repository")
 public class MroomserverApplication {

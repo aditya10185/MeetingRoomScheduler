@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -32,7 +30,6 @@ public class AuthUtil {
 	
 	
 	public String createToken(User user) {
-		logger.info(secret);
 		Algorithm algorithmHS = Algorithm.HMAC256(secret);
 		try {
 			Date currentDate = new Date();
