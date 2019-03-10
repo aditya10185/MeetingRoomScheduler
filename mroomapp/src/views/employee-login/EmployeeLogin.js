@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
     Container,
     Card
 } from 'reactstrap'
 import EmployeeLoginForm from '../../components/login-employee-form/EmployeeLoginForm';
 
-export default class EmployeeLogin extends Component {
+class EmployeeLogin extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+    }
     render() {
         return (
             <Container className="mt-2">
@@ -16,3 +21,6 @@ export default class EmployeeLogin extends Component {
         )
     }
 }
+
+
+export default connect()(EmployeeLogin);

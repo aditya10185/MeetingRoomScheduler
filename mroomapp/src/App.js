@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {Provider, connect} from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import {connect} from 'react-redux';
 import Home from './views/home/Home';
 import './App.scss';
 import Navbar from './components/navbar/Navbar';
 import CreateEmployee from './views/create-employee/CreateEmployee';
 import EmployeeLogin from './views/employee-login/EmployeeLogin';
-import ConfigureStore from './ConfigureStore';
+import { userLogin } from './actions/AuthActions';
 
-const {persistor, store} = ConfigureStore();
+
 
 class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
       <div className="App">
       <Navbar></Navbar>
       <Router>
@@ -27,10 +24,16 @@ class App extends Component {
         </div> 
       </Router>
       </div>
-      </PersistGate>
-      </Provider>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+  USER_LOGIN: dispatch(userLogin)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

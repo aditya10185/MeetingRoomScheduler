@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {connect} from 'react-redux';
 import {
     Button,
     Form,
@@ -10,9 +10,12 @@ import {
     // FormText
 } from 'reactstrap';
 
-import {loginUser} from '../../services';
+// import {userLogin} from '../../actions/AuthActions';
 
-export default class EmployeeLogin extends Component {
+import {loginUser} from '../../services';
+import { USER_LOGIN } from '../../actions/ActionTypes';
+
+class EmployeeLogin extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +40,12 @@ export default class EmployeeLogin extends Component {
 
     handleSubmit(e) {
         loginUser(this.state.email, this.state.password).then(res => {
-            console.log(res);
+            console.log(res.data);
+            console.log(this.props)
+            this.props.userLogin({
+                accessToken: res.data.token, 
+                user:res.data.user
+            });
         }).catch(err => {
             this.setState({
                 error: true,
@@ -70,3 +78,12 @@ export default class EmployeeLogin extends Component {
         );
     }
 }
+const mapStateToProps = state => ({
+    ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+    userLogin: (payload) => dispatch({type: USER_LOGIN, payload: payload})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeLogin);

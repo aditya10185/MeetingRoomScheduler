@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import './Home.scss';
 
-export default class Home extends Component {
+class Home extends Component {
     render() {
         return (
             <div>Hello from Home!</div>
         );
     }
 }
+
+export default connect()(Home);

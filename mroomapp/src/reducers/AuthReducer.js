@@ -8,10 +8,13 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
     switch(action.type) {
         case USER_LOGIN: {
-            const {accessToken, email} = action.payload;
+            console.log(action);
+            const {accessToken, user} = action.payload;
+            console.log(accessToken, user);
             return {
                 ...state, 
-                accessToken
+                accessToken,
+                user
             };
         }
         default: 
