@@ -8,11 +8,11 @@ import axios from 'axios';
 // });
 
 export const createEmployee = (employee) => {
-    return axios.post('http://localhost:8080/employee', employee);
+    return axios.post('http://localhost:8080/api/user', employee);
 }
 
 export const loginUser = (email, password) => {
-    return axios.post('http://localhost:8080/auth/login', {
+    return axios.post('http://localhost:8080/api/auth/login', {
         email: email,
         password: password
     });
