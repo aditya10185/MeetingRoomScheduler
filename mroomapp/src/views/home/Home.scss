@@ -28,12 +28,24 @@
 }
 
 .banner-overlay {
-    height: 95vh;
+    height: 100vh;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
     z-index: -2;
-    background: #000000;
-    opacity: .7;
+    background: #011c29;
+    opacity: .8;
+}
+
+.banner-content{
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.banner-title{
+    font-size: 3em;
 }

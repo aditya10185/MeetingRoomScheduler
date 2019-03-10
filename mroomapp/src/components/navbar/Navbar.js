@@ -57,15 +57,26 @@ class Header extends Component {
   userOptions() {
     if (this.props.auth.accessToken) {
       return (
+        <DropdownMenu right>
+        <DropdownItem>
+        <FontAwesomeIcon icon="calendar-alt"/> Scheduled Meetings
+        </DropdownItem>
+        <DropdownItem>
+        <FontAwesomeIcon icon="user"/> User Profile
+        </DropdownItem>
+        <DropdownItem divider/>
         <DropdownItem onClick={() => this.logout()}>
-          Logout
+        <FontAwesomeIcon icon="lock"/> Logout
           </DropdownItem>
+          </DropdownMenu>
       )
     } else {
       return (
+        <DropdownMenu right>
         <DropdownItem onClick={() => this.toggleModal()}>
           Login/Register
           </DropdownItem>
+        </DropdownMenu>
       )
     }
   }
@@ -108,8 +119,8 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <Navbar color="dark" className="shadow" dark expand="md">
-          <NavbarBrand href="/">Meeting Room Scheduler</NavbarBrand>
+        <Navbar color="faded" dark expand="md">
+          <NavbarBrand href="/">Meeting Room</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -118,11 +129,9 @@ class Header extends Component {
               </NavItem> */}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav>
-                  <FontAwesomeIcon icon="user-circle"></FontAwesomeIcon>
+                  <FontAwesomeIcon color="white" size="2x" icon="user-circle"></FontAwesomeIcon>
                 </DropdownToggle>
-                <DropdownMenu right>
                   {this.userOptions()}
-                </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
           </Collapse>

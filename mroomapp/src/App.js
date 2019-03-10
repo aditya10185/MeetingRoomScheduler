@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
+import {faUserCircle, faCalendarAlt, faChevronCircleRight, faCalendarCheck, faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 import Home from './views/home/Home';
 import './App.scss';
 import Navbar from './components/navbar/Navbar';
 import { userLogin } from './actions/AuthActions';
 
-library.add(faUserCircle);
+library.add(faUserCircle, faCalendarAlt, faChevronCircleRight, faCalendarCheck, faUser, faLock);
 
 class App extends Component {
 
