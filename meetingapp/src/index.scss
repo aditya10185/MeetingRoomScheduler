@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,600');
+
+$font-family-sans-serif: 'Montserrat', sans-serif;
+$body-bg: rgb(235, 235, 235);
+
+$theme-colors: (
+    "primary": #011c29,
+    "danger": #b40000,
+);
+
+@import '~bootstrap/scss/bootstrap';
