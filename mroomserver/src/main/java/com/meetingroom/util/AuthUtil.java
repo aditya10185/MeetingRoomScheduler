@@ -1,5 +1,6 @@
 package com.meetingroom.util;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,7 +20,14 @@ import com.meetingroom.model.User;
 import com.meetingroom.repository.UserRepository;
 
 @Component
-public class AuthUtil {
+public class AuthUtil implements IAuthUtil, Serializable {
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8154862577533943349L;
+
 	@Value("${app.secret}")
 	private String secret;
 	

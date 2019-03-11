@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meetingroom.service.AuthService;
+import com.meetingroom.service.IAuthService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -23,7 +23,7 @@ import com.meetingroom.service.AuthService;
 public class AuthController {
 	
 	@Autowired
-	private AuthService authService;
+	private IAuthService authService;
 	private Logger logger = LoggerFactory.getLogger(AuthController.class);
 	
 	

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meetingroom.model.User;
-import com.meetingroom.service.UserService;
+import com.meetingroom.service.IUserService;
 import com.meetingroom.util.Passwords;
 
 @RestController
@@ -27,7 +27,7 @@ import com.meetingroom.util.Passwords;
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 	
 		public static final Logger logger = LoggerFactory.getLogger(UserController.class);
 		
