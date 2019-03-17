@@ -7,10 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements Serializable {
 	
 	
@@ -21,7 +26,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -2488894485875375341L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", unique= true)
 	private long id;
 	
@@ -38,7 +43,7 @@ public class User implements Serializable {
 	private String contactNo;
 	
 	@Column(name = "password")
-	private String password;
+	private @JsonIgnore String password;
 	
 	
 

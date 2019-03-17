@@ -21,7 +21,7 @@ public class MeetingRoom implements Serializable {
 	private static final long serialVersionUID = -5477595125206172242L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", unique= true)
 	private long id;
 	

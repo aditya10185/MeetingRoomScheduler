@@ -3,12 +3,16 @@
  */
 package com.meetingroom.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.meetingroom.controller.AuthController;
 import com.meetingroom.model.MeetingRoom;
 import com.meetingroom.repository.MeetingRoomRepository;
 
@@ -21,6 +25,8 @@ public class MeetingRoomService implements IMeetingRoomService {
 	
 	@Autowired
 	private MeetingRoomRepository mroomrepo;
+	
+	private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
 	/* (non-Javadoc)
 	 * @see com.meetingroom.service.IMeetingRoomService#getAllMeetingRooms()
@@ -55,7 +61,12 @@ public class MeetingRoomService implements IMeetingRoomService {
 	@Override
 	public Map<String, Object> createMeetingRoom(MeetingRoom m) {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> response = new HashMap<String, Object>();
+		logger.info("Creating new room");
+		mroomrepo.save(m);
+		response.put("meetingRoom", m);
+		response.put("message", "Successfully created");
+		return response;
 	}
 
 	/* (non-Javadoc)

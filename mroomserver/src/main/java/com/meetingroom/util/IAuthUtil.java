@@ -9,5 +9,5 @@ public interface IAuthUtil {
 	
 	public String createToken(User user);
 	
-	public User verifyAuthToken(String token);
+	public boolean verifyAuthToken(String token);
 }

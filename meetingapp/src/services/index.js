@@ -1,19 +1,13 @@
 import axios from 'axios';
+import {createEmployee, loginUser} from './services'
 
-// const instance = axios.create({
-//     baseUrl: 'http://localhost:8080',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     }
-// });
 
-export const createEmployee = (employee) => {
-    return axios.post('http://localhost:8080/api/user', employee);
-}
+const instance = axios.create({
+    baseURL: 'http://localhost:8080/api',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    timeout: 60000
+});
 
-export const loginUser = (email, password) => {
-    return axios.post('http://localhost:8080/api/auth/login', {
-        email: email,
-        password: password
-    });
-}
+export {createEmployee, loginUser, instance};

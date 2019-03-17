@@ -34,7 +34,7 @@ public class AuthService implements IAuthService {
 	 		Map<String, Object> response = new HashMap<>();
 	 		response.put("token", token);
 	 		ObjectMapper objMap = new ObjectMapper();
-	 		Map<String, Object> userMap = objMap.convertValue(user, Map.class);
+	 		Map<?, ?> userMap = objMap.convertValue(user, Map.class);
 	 		userMap.remove("password");
 	 		response.put("user", userMap);
 	 		return response;

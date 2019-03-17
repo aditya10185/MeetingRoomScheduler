@@ -46,7 +46,7 @@ public class AuthUtil implements IAuthUtil, Serializable {
 			c.add(Calendar.DATE, 1);
 			String token = JWT.create()
 								.withClaim("userId", user.getId())
-								.withClaim("userEmail", user.getEmail())
+								.withClaim("userEmail", user.getEmail().toString())
 								.withIssuer("MeetingRoom")
 								.withExpiresAt(c.getTime())
 								.sign(algorithmHS);
@@ -57,7 +57,7 @@ public class AuthUtil implements IAuthUtil, Serializable {
 		}
 	}
 	
-	public User verifyAuthToken(String token) {
+	public boolean verifyAuthToken(String token) {
 		Algorithm algorithmHS = Algorithm.HMAC256(secret);
 		try {
 			JWTVerifier verifier = JWT.require(algorithmHS)
@@ -66,10 +66,11 @@ public class AuthUtil implements IAuthUtil, Serializable {
 										.build();
 			DecodedJWT jwt = verifier.verify(token);
 			logger.info(jwt.getClaim("userEmail").toString());
-			return userRepository.findUserByEmail(jwt.getClaim("userEmail").toString());
+			return true;
 		} catch(JWTVerificationException exception) {
+			exception.printStackTrace();
 			logger.debug(exception.getMessage());
-			return null;
+			return false;
 		}
 	}
 }

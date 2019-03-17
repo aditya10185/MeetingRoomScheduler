@@ -21,12 +21,15 @@ public class ScheduleMeetingRoom implements Serializable {
 	private static final long serialVersionUID = -1806125220009623467L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", unique= true)
 	private long id;
 	
 	@Column(name = "host_id", nullable = false)
-	private long host_id;
+	private long hostId;
+	
+	@Column(name = "host_email", nullable = false)
+	private String hostEmail;
 	
 //	Email address of the attendee as the attendee may not be part of the system
 	@Column(name = "attendee")
@@ -61,15 +64,29 @@ public class ScheduleMeetingRoom implements Serializable {
 	/**
 	 * @return the host_id
 	 */
-	public long getHost_id() {
-		return host_id;
+	public long getHostId() {
+		return hostId;
 	}
 
 	/**
 	 * @param host_id the host_id to set
 	 */
-	public void setHost_id(long host_id) {
-		this.host_id = host_id;
+	public void setHostId(long host_id) {
+		this.hostId = host_id;
+	}
+	
+	/**
+	 * @return the hostName
+	 */
+	public String getHostEmail() {
+		return hostEmail;
+	}
+
+	/**
+	 * @param hostName the hostName to set
+	 */
+	public void setHostEmail(String hostEmail) {
+		this.hostEmail = hostEmail;
 	}
 
 	/**
@@ -153,10 +170,11 @@ public class ScheduleMeetingRoom implements Serializable {
 	 * @param meetingLocation
 	 * @param meetingRoomId
 	 */
-	public ScheduleMeetingRoom(long host_id, String attendee, Date meetingDate, String meetingStatus,
+	public ScheduleMeetingRoom(long host_id, String hostEmail, String attendee, Date meetingDate, String meetingStatus,
 			String meetingLocation, long meetingRoomId) {
 		super();
-		this.host_id = host_id;
+		this.hostId = host_id;
+		this.hostEmail = hostEmail;
 		this.attendee = attendee;
 		this.meetingDate = meetingDate;
 		this.meetingStatus = meetingStatus;
@@ -176,7 +194,7 @@ public class ScheduleMeetingRoom implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "ScheduleMeetingRoom [id=" + id + ", host_id=" + host_id + ", attendee=" + attendee + ", meetingStatus="
+		return "ScheduleMeetingRoom [id=" + id + ", host_id=" + hostId + ", attendee=" + attendee + ", meetingStatus="
 				+ meetingStatus + ", meetingLocation=" + meetingLocation + ", meetingRoomId=" + meetingRoomId + "]";
 	}
 	

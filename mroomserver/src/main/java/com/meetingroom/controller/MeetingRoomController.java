@@ -37,19 +37,25 @@ public class MeetingRoomController {
 	@PostMapping
 	public @ResponseBody ResponseEntity<Map<String, Object>> createNewMeetingRoom(@RequestHeader("authorization") String jwt, @RequestBody Map<String, Object> payload) {
 		try {
-			authUtil.verifyAuthToken(jwt);
-			String name = payload.get("name").toString();
-			String location = payload.get("location").toString();
-			int capacity = Integer.parseInt(payload.get("capacity").toString());
-			MeetingRoom m = new MeetingRoom(name, location, capacity);
-			Map<String, Object> response = meetingRoomService.createMeetingRoom(m);
-			return new ResponseEntity<Map<String, Object>> (response, HttpStatus.ACCEPTED);
-		} catch(JWTVerificationException jve) {
-			logger.debug(jve.getMessage());
+			logger.info(jwt);
+			if(authUtil.verifyAuthToken(jwt)) {
+				String name = payload.get("name").toString();
+				String location = payload.get("location").toString();
+				int capacity = Integer.parseInt(payload.get("capacity").toString());
+				MeetingRoom m = new MeetingRoom(name, location, capacity);
+				Map<String, Object> response = meetingRoomService.createMeetingRoom(m);
+				return new ResponseEntity<Map<String, Object>> (response, HttpStatus.ACCEPTED);
+			}
 			Map<String, Object> error = new HashMap<String, Object>();
-			error.put("error", "Unauthorized user");
+			error.put("error", "Sorry, you are not authorized to create a new meeting room.");
+			return new ResponseEntity<Map<String, Object>> (error, HttpStatus.UNAUTHORIZED);
+		} catch(JWTVerificationException jve) {
+			logger.info(jve.getMessage());
+			Map<String, Object> error = new HashMap<String, Object>();
+			error.put("error", "Sorry, you are not authorized to create a new meeting room.");
 			return new ResponseEntity<Map<String, Object>> (error, HttpStatus.UNAUTHORIZED);
 		} catch(Exception e) {
+			e.printStackTrace();
 			logger.debug(e.getMessage());
 			Map<String, Object> error = new HashMap<String, Object>();
 			error.put("error", "Something went wrong, try again.");

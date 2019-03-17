@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, ProtectedRoute} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {faUserCircle, faCalendarAlt, faChevronCircleRight, faCalendarCheck, faUser, faLock, faCalendarPlus} from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,7 @@ class App extends Component {
       <Router>
         <div> 
           <Route path="/" exact component={Home}/>
+          {/* <ProtectedRoute path="/meeting" exact /> */}
         </div> 
       </Router>
       </div>

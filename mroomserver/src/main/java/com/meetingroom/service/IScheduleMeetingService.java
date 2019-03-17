@@ -12,7 +12,7 @@ public interface IScheduleMeetingService {
 	
 	public List<ScheduleMeetingRoom> getAllScheduledMeetings();
 	
-	public Map<String, Object> createNewMeeting(long userId, List<String> attendees, ScheduleMeetingRoom meeting);
+	public Map<String, Object> createNewMeeting(List<ScheduleMeetingRoom> meetings);
 	
 	public List<ScheduleMeetingRoom> getScheduledMeetingsForUser(long userId);
 	

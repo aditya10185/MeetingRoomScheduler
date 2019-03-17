@@ -46,6 +46,7 @@ public class AuthController {
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.debug(e.getMessage());
 			long endTime = System.currentTimeMillis();
 			long timeElapased = endTime - startTime;
@@ -55,5 +56,6 @@ public class AuthController {
 			return new ResponseEntity<Map<String, Object>>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 
 }
