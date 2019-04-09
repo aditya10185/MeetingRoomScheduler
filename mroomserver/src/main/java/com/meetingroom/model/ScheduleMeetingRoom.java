@@ -1,7 +1,7 @@
 package com.meetingroom.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,11 +19,14 @@ public class ScheduleMeetingRoom implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1806125220009623467L;
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", unique= true)
+	@Column(name = "id")
 	private long id;
+	
+	@Column(name = "meeting_id")
+	private String meetingId;
 	
 	@Column(name = "host_id", nullable = false)
 	private long hostId;
@@ -35,8 +38,11 @@ public class ScheduleMeetingRoom implements Serializable {
 	@Column(name = "attendee")
 	private String attendee;
 	
-	@Column(name = "meeting_date_time")
-	private Date meetingDate;
+	@Column(name = "meeting_start_date_time")
+	private Timestamp meetingStartDate;
+	
+	@Column(name = "meeting_end_date_time")
+	private Timestamp meetingEndDate;
 	
 	@Column(name = "meeting_status")
 	private String meetingStatus;
@@ -50,15 +56,15 @@ public class ScheduleMeetingRoom implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
-		return id;
+	public String getMeetingId() {
+		return meetingId;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public void setMeetingId(String meetingId) {
+		this.meetingId = meetingId;
 	}
 
 	/**
@@ -94,6 +100,22 @@ public class ScheduleMeetingRoom implements Serializable {
 	 */
 	public String getAttendee() {
 		return attendee;
+	}
+
+	public Timestamp getMeetingStartDate() {
+		return meetingStartDate;
+	}
+
+	public void setMeetingStartDate(Timestamp meetingStartDate) {
+		this.meetingStartDate = meetingStartDate;
+	}
+
+	public Timestamp getMeetingEndDate() {
+		return meetingEndDate;
+	}
+
+	public void setMeetingEndDate(Timestamp meetingEndDate) {
+		this.meetingEndDate = meetingEndDate;
 	}
 
 	/**
@@ -146,21 +168,6 @@ public class ScheduleMeetingRoom implements Serializable {
 	}
 	
 	
-
-	/**
-	 * @return the meetingDate
-	 */
-	public Date getMeetingDate() {
-		return meetingDate;
-	}
-
-	/**
-	 * @param meetingDate the meetingDate to set
-	 */
-	public void setMeetingDate(Date meetingDate) {
-		this.meetingDate = meetingDate;
-	}
-
 	/**
 	 * @param id
 	 * @param host_id
@@ -170,16 +177,33 @@ public class ScheduleMeetingRoom implements Serializable {
 	 * @param meetingLocation
 	 * @param meetingRoomId
 	 */
-	public ScheduleMeetingRoom(long host_id, String hostEmail, String attendee, Date meetingDate, String meetingStatus,
+	public ScheduleMeetingRoom(String meetingId, long host_id, String hostEmail, String attendee, Timestamp meetingStartDate, Timestamp meetingEndDate, String meetingStatus,
 			String meetingLocation, long meetingRoomId) {
 		super();
+		this.meetingId = meetingId;
 		this.hostId = host_id;
 		this.hostEmail = hostEmail;
 		this.attendee = attendee;
-		this.meetingDate = meetingDate;
+		this.meetingStartDate = meetingStartDate;
+		this.meetingEndDate = meetingEndDate;
 		this.meetingStatus = meetingStatus;
 		this.meetingLocation = meetingLocation;
 		this.meetingRoomId = meetingRoomId;
+	}
+	
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	/**

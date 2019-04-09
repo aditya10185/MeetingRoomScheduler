@@ -7,8 +7,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
+  // NavItem,
+  // NavLink,
   Modal,
   ModalHeader,
   ModalBody,
@@ -110,6 +110,7 @@ class Header extends Component {
           </div>
         )
       }
+      default: {}
     }
   }
 
@@ -121,10 +122,10 @@ class Header extends Component {
             <FontAwesomeIcon color="white" size="2x" icon="calendar-alt"></FontAwesomeIcon>
           </DropdownToggle>
           <DropdownMenu right>
-          <DropdownItem>
+          <DropdownItem href="/meeting/new">
             <FontAwesomeIcon icon="calendar-plus"/> Schedule New Meeting
           </DropdownItem>
-          <DropdownItem>
+          <DropdownItem href="/meeting/view">
             <FontAwesomeIcon icon="calendar-alt"/> View Scheduled Meetings
           </DropdownItem>
           </DropdownMenu>
@@ -133,11 +134,18 @@ class Header extends Component {
     }
   }
 
+  getNavColor() {
+    const currentRoute = window.location.pathname;
+    if(currentRoute === '/' ) {
+      return 'faded';
+    } else return 'primary';
+  }
+
   render() {
     return (
       <div>
-        <Navbar color="faded" dark expand="md">
-          <NavbarBrand href="/">Meeting Room</NavbarBrand>
+        <Navbar color={this.getNavColor()} dark expand="md">
+          <NavbarBrand href="/" className="text-white"><FontAwesomeIcon icon="handshake" className="d-inline-block align-middle mr-2" size="2x" color="#F0D5BE"/>Meeting Room Application</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

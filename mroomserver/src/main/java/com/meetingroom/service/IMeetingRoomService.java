@@ -1,5 +1,6 @@
 package com.meetingroom.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -21,5 +22,7 @@ public interface IMeetingRoomService {
 	public MeetingRoom deleteMeetingRoom(int id);
 	
 	public Map<String, Object> updateMeetingRoom(MeetingRoom m);
+	
+	public Map<String, Object> getAvailableMeetingRooms(Timestamp startDate, Timestamp endDate, int capacity);
 
 }

@@ -3,6 +3,7 @@
  */
 package com.meetingroom.service;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,4 +88,14 @@ public class MeetingRoomService implements IMeetingRoomService {
 		return null;
 	}
 
+	@Override
+	public Map<String, Object> getAvailableMeetingRooms(Timestamp startDate, Timestamp endDate, int capacity) {
+		// TODO Auto-generated method stub
+		Map<String, Object> response = new HashMap<>();
+		List<MeetingRoom> meetingRooms = mroomrepo.getAvailableMeetingRooms(startDate, endDate, capacity);
+		logger.info(meetingRooms.toString());
+		response.put("meetingRooms", meetingRooms);
+		response.put("message", "Ok");
+		return response;
+	}
 }

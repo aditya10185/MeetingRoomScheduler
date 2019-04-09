@@ -10,3 +10,15 @@ export const loginUser = (email, password) => {
         password: password
     });
 }
+
+export const getAvailableRooms = (startDateTime, endDateTime, capacity, token) => {
+    return instance.post('/meeting-room/available', {
+        meetingStartDate: startDateTime,
+        meetingEndDate: endDateTime,
+        capacity: capacity
+    }, {
+        headers: {
+            authorization: token
+        }
+    })
+}
