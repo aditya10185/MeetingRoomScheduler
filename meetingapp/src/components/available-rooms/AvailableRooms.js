@@ -98,6 +98,7 @@ class AvailableRooms extends React.Component {
                             host={this.props.auth.user} 
                             meetingStartTime={this.props.mroom.meetingStartDateTime}
                             meetingEndTime={this.props.mroom.meetingEndDateTime}
+                            mroom={this.state.room}
                         />
                     </ModalBody>
                 </Modal>
