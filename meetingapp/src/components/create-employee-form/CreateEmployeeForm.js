@@ -80,11 +80,7 @@ export default class CreateEmployeeForm extends Component {
 
     render() {
         return (
-            <Form>
-                <h2>
-                    Register:
-                </h2>
-                <hr/>   
+            <Form>  
                 <FormGroup>
                     <Label for="firstName">Enter First Name:</Label>
                     <Input type="text" id="firstName" placeholder="Eg. John" required value={this.state.firstName} onChange={(e) => this.handleFirstNameChange(e)}></Input>

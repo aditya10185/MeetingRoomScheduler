@@ -19,7 +19,7 @@ import com.meetingroom.service.IAuthService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class AuthController {
 	
 	@Autowired

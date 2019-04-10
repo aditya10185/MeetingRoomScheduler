@@ -51,7 +51,7 @@ public class ScheduleMeetingService implements IScheduleMeetingService {
 			attendees.add(m.getAttendee());
 		}
 		email.put("to", attendees);
-		email.put("subject", "Scheduled Meeting for - "+ meetings.get(0).getMeetingDate() + " at "+ meetings.get(0).getMeetingLocation());
+		email.put("subject", "Scheduled Meeting for - "+ meetings.get(0).getMeetingStartDate() + " at "+ meetings.get(0).getMeetingLocation());
 		email.put("message", "New Meeting Scheduled");
 		emailUtil.sendEmail(email);
 		return response;
