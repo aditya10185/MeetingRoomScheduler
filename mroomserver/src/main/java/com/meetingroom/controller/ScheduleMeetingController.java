@@ -3,11 +3,11 @@
  */
 package com.meetingroom.controller;
 
-import java.sql.Date;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meetingroom.model.ScheduleMeetingRoom;
 import com.meetingroom.service.IScheduleMeetingService;
 import com.meetingroom.util.IAuthUtil;
@@ -63,7 +64,7 @@ public class ScheduleMeetingController {
 				java.util.Date endDate = formatter.parse(payload.get("meetingEndDate").toString());
 				logger.info(startDate.toString());
 				long difference = endDate.getTime() - startDate.getTime();
-				if(difference >= 14400000) {
+				if(difference <= 14400000) {
 //				Sql date conversion
 				Timestamp meetingStartDate = new Timestamp(startDate.getTime());
 				Timestamp meetingEndDate = new Timestamp(endDate.getTime());
@@ -83,7 +84,31 @@ public class ScheduleMeetingController {
 				}
 			} else {
 				Map<String, Object> error = new HashMap<String, Object>();
-				error.put("error", "Sorry, you are not authorized to create a new meeting room.");
+				error.put("error", "Sorry, you are not authorized to create a new meeting");
+				return new ResponseEntity<Map<String, Object>> (error, HttpStatus.UNAUTHORIZED);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			logger.debug(e.getMessage());
+			Map<String, Object> error = new HashMap<String, Object>();
+			error.put("error", "Something went wrong, try again.");
+			return new ResponseEntity<Map<String, Object>> (error, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/host/{hostId}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> getMeetingsByHostId(@RequestHeader("authorization") String jwt, @PathVariable("hostId") long hostId) {
+		try {
+			if(authUtil.verifyAuthToken(jwt)) {
+				List<ScheduleMeetingRoom> meetings = meeting.getScheduledMeetingsForUser(hostId);
+				Map<String, Object> response = new HashMap<String, Object>();
+				response.put("msg", "success");
+				response.put("meetings", meetings);
+				return new ResponseEntity<Map<String, Object>> (response, HttpStatus.ACCEPTED);
+			}else {
+				Map<String, Object> error = new HashMap<String, Object>();
+				error.put("error", "Sorry, you are not authorized to create a new meeting");
 				return new ResponseEntity<Map<String, Object>> (error, HttpStatus.UNAUTHORIZED);
 			}
 		} catch(Exception e) {

@@ -11,6 +11,7 @@ import Navbar from './components/navbar/Navbar';
 import { userLogin } from './actions/AuthActions';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import unauthorized from './views/unauthorized/Unauthorized';
+import UserProfile from './views/user/Profile';
 
 library.add(faUserCircle, faCalendarAlt, faChevronCircleRight, faHandPointLeft, faSync, faCalendarCheck, faUser, faLock, faCalendarPlus, faExclamationTriangle, faHandshake);
 
@@ -27,7 +28,8 @@ class App extends Component {
           <Route path="/" exact component={Home}/>
           <Route path="/unauthorized" exact component = {unauthorized}/>
           <PrivateRoute exact path="/meeting/new" accessToken={this.props.auth.accessToken} component={NewMeeting}/>
-          <PrivateRoute exact path="/meeting/view" accessToken={this.props.auth.accessToken} component={ViewMeeting}/>
+          <PrivateRoute exact path="/meeting/view" accessToken={this.props.auth.accessToken} user={this.props.auth.user} component={ViewMeeting}/>
+          <PrivateRoute exact path="/profile" accessToken={this.props.auth.accessToken} component={UserProfile}/>
         </div> 
       </Router>
       </div>

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface IEmailUtil {
 	
-	public void sendEmail(Map<String, Object> email);
-	
+	public void sendEmail(Map<String, String> email);
 
 }

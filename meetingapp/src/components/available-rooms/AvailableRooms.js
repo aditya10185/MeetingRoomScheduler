@@ -95,10 +95,12 @@ class AvailableRooms extends React.Component {
                         <ScheduleMeeting 
                             participants={this.props.mroom.capacity} 
                             maxCapacity={this.state.room.capacity} 
-                            host={this.props.auth.user} 
+                            host={this.props.auth.user}
+                            token={this.props.auth.accessToken} 
                             meetingStartTime={this.props.mroom.meetingStartDateTime}
                             meetingEndTime={this.props.mroom.meetingEndDateTime}
                             mroom={this.state.room}
+                            modalToggle={() => this.toggleScheduleModal()}
                         />
                     </ModalBody>
                 </Modal>

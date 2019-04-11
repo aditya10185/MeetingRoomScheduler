@@ -75,6 +75,7 @@ class CreateMeeting extends React.Component {
     console.log(startDate, endDate);
     getAvailableRooms(startDate, endDate, this.state.capacity, this.props.auth.accessToken).then(res => {
       console.log(res);
+      if(res.data.meetingRooms.length > 0) {
       this.props.mRoomData({
         mErr: null,
         mRooms: res.data.meetingRooms,
@@ -83,6 +84,16 @@ class CreateMeeting extends React.Component {
         duration: this.state.meetingDuration,
         meetingEndDateTime: endDate
       });
+      } else {
+        this.props.mRoomData({
+          mErr: 'Sorry! no meeting rooms available - book meeting on https://zoom.us?',
+          mRooms: res.data.meetingRooms,
+          meetingStartDateTime: startDate,
+          capacity: this.state.capacity,
+          duration: this.state.meetingDuration,
+          meetingEndDateTime: endDate
+        });
+      }
       this.props.mRoomLoading({
         mRoomLoading: false
       })

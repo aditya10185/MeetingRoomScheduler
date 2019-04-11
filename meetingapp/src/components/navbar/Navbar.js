@@ -58,7 +58,7 @@ class Header extends Component {
     if (this.props.auth.accessToken) {
       return (
         <DropdownMenu right>
-          <DropdownItem>
+          <DropdownItem href="/profile">
             <FontAwesomeIcon icon="user" /> User Profile
         </DropdownItem>
           <DropdownItem divider />

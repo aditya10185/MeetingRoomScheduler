@@ -22,3 +22,30 @@ export const getAvailableRooms = (startDateTime, endDateTime, capacity, token) =
         }
     })
 }
+
+export const scheduleMeeting = (hostId, hostEmail, attendees, meetingStartDate, meetingEndDate, meetingLocation, meetingRoomId, token) => {
+    return instance.post('/meeting', {
+        hostId,
+        hostEmail,
+        attendees,
+        meetingStartDate,
+        meetingEndDate,
+        meetingLocation,
+        meetingRoomId
+    }, {
+        headers: {
+            authorization: token
+        }
+    })
+}
+
+export const getScheduledMeetingsForHost = (hostId, token) => {
+    return instance.get(
+        `/meeting/host/${hostId}`,
+        {
+            headers: {
+                authorization: token
+            }
+        }
+    )
+}
