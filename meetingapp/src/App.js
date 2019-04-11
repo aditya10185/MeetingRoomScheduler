@@ -12,6 +12,7 @@ import { userLogin } from './actions/AuthActions';
 import PrivateRoute from './components/private-route/PrivateRoute';
 import unauthorized from './views/unauthorized/Unauthorized';
 import UserProfile from './views/user/Profile';
+import NewMeetingRoom from './views/meeting-room/NewMeetingRoom';
 
 library.add(faUserCircle, faCalendarAlt, faChevronCircleRight, faHandPointLeft, faSync, faCalendarCheck, faUser, faLock, faCalendarPlus, faExclamationTriangle, faHandshake);
 
@@ -30,6 +31,7 @@ class App extends Component {
           <PrivateRoute exact path="/meeting/new" accessToken={this.props.auth.accessToken} component={NewMeeting}/>
           <PrivateRoute exact path="/meeting/view" accessToken={this.props.auth.accessToken} user={this.props.auth.user} component={ViewMeeting}/>
           <PrivateRoute exact path="/profile" accessToken={this.props.auth.accessToken} component={UserProfile}/>
+          <PrivateRoute exact path="/meeting-room/new" accessToken={this.props.auth.accessToken} component={NewMeetingRoom}/>
         </div> 
       </Router>
       </div>

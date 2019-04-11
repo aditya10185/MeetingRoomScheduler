@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {createEmployee, loginUser, getAvailableRooms, getScheduledMeetingsForHost, scheduleMeeting} from './services'
+import {createEmployee, loginUser, getAvailableRooms, getScheduledMeetingsForHost, createNewMeetingRoom, scheduleMeeting} from './services'
 
 
 const instance = axios.create({
@@ -10,4 +10,4 @@ const instance = axios.create({
     timeout: 60000
 });
 
-export {createEmployee, loginUser, instance, getAvailableRooms, scheduleMeeting, getScheduledMeetingsForHost};
+export {createEmployee, loginUser, instance, getAvailableRooms, scheduleMeeting, createNewMeetingRoom, getScheduledMeetingsForHost};

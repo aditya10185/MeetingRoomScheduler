@@ -23,6 +23,18 @@ export const getAvailableRooms = (startDateTime, endDateTime, capacity, token) =
     })
 }
 
+export const createNewMeetingRoom = (token, name, location, capacity) => {
+    return instance.post('/meeting-room', {
+        name: name,
+        location: location,
+        capacity: capacity
+    }, {
+        headers: {
+            authorization: token
+        }
+    })
+}
+
 export const scheduleMeeting = (hostId, hostEmail, attendees, meetingStartDate, meetingEndDate, meetingLocation, meetingRoomId, token) => {
     return instance.post('/meeting', {
         hostId,

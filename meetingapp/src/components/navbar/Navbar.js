@@ -61,6 +61,9 @@ class Header extends Component {
           <DropdownItem href="/profile">
             <FontAwesomeIcon icon="user" /> User Profile
         </DropdownItem>
+        <DropdownItem href="/meeting-room/new">
+            <FontAwesomeIcon icon="calendar-plus" /> New meeting room
+        </DropdownItem>
           <DropdownItem divider />
           <DropdownItem onClick={() => this.logout()}>
             <FontAwesomeIcon icon="lock" /> Logout
@@ -110,7 +113,7 @@ class Header extends Component {
           </div>
         )
       }
-      default: {}
+      default: { }
     }
   }
 
@@ -122,11 +125,11 @@ class Header extends Component {
             <FontAwesomeIcon color="white" size="2x" icon="calendar-alt"></FontAwesomeIcon>
           </DropdownToggle>
           <DropdownMenu right>
-          <DropdownItem href="/meeting/new">
-            <FontAwesomeIcon icon="calendar-plus"/> Schedule New Meeting
+            <DropdownItem href="/meeting/new">
+              <FontAwesomeIcon icon="calendar-plus" /> Schedule New Meeting
           </DropdownItem>
-          <DropdownItem href="/meeting/view">
-            <FontAwesomeIcon icon="calendar-alt"/> View Scheduled Meetings
+            <DropdownItem href="/meeting/view">
+              <FontAwesomeIcon icon="calendar-alt" /> View Scheduled Meetings
           </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
@@ -136,7 +139,7 @@ class Header extends Component {
 
   getNavColor() {
     const currentRoute = window.location.pathname;
-    if(currentRoute === '/' ) {
+    if (currentRoute === '/') {
       return 'faded';
     } else return 'primary';
   }
@@ -145,7 +148,7 @@ class Header extends Component {
     return (
       <div>
         <Navbar color={this.getNavColor()} dark expand="md">
-          <NavbarBrand href="/" className="text-white"><FontAwesomeIcon icon="handshake" className="d-inline-block align-middle mr-2" size="2x" color="#F0D5BE"/>Meeting Room Application</NavbarBrand>
+          <NavbarBrand href="/" className="text-white"><FontAwesomeIcon icon="handshake" className="d-inline-block align-middle mr-2" size="2x" color="#F0D5BE" />Meeting Room Application</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
