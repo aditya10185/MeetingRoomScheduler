@@ -22,14 +22,14 @@ export default class ScheduleMeeting extends React.Component {
 
     handleAttendeeChange(e) {
         let emailAddresses = e.target.value.split(';');
-        const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-        const emails = emailAddresses.map((email) => {
-            if (email.match(emailPattern)) {
-                return email;
-            } else return null;
-        })
+        // const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        // const emails = emailAddresses.map((email) => {
+        //     if (email.match(emailPattern)) {
+        //         return email;
+        //     } else return null;
+        // })
         this.setState({
-            attendees: emails
+            attendees: emailAddresses
         })
     }
 

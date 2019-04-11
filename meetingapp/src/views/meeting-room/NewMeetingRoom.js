@@ -57,15 +57,15 @@ class NewMeetingRoom extends React.Component {
                         <Form>
                             <FormGroup>
                                 <Label for="name">Room Name:</Label>
-                                <Input id="name" onChange={() => this.handleName()} type="text" placeholder="eg. Meeting Room 1"></Input>
+                                <Input id="name" onChange={(e) => this.handleName(e)} type="text" placeholder="eg. Meeting Room 1"></Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="capacity">Room capacity:</Label>
-                                <Input id="capacity" onChange={() => this.handleCapacity()} type="number" min="1" max="10" placeholder="eg. 5"></Input>
+                                <Input id="capacity" onChange={(e) => this.handleCapacity(e)} type="number" min="1" max="10" placeholder="eg. 5"></Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="location">Room location:</Label>
-                                <Input id="location" onChange={() => this.handleLocation()} type="text" placeholder="eg. Meeting Room 1"></Input>
+                                <Input id="location" onChange={(e) => this.handleLocation(e)} type="text" placeholder="eg. Meeting Room 1"></Input>
                             </FormGroup>
                             <div className="text-center">
                                 <Button outline onClick={() => this.handleSubmit()} color="primary">

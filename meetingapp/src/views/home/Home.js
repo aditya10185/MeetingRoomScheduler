@@ -14,7 +14,7 @@ class Home extends Component {
                 <div>
                     <h2 className="banner-title">Welcome {this.props.auth.user.firstName} {this.props.auth.user.lastName}</h2>
                     <h3>Would you like to schedule a meeting today?</h3>
-                    <Button size="lg" color="light" className="mt-4">Let's Go <FontAwesomeIcon icon="chevron-circle-right"/></Button>
+                    <Button size="lg" color="light" onClick={() => window.location.href="/meeting/new"} className="mt-4">Let's Go <FontAwesomeIcon icon="chevron-circle-right"/></Button>
                 </div>
             )
         } else {
@@ -22,7 +22,7 @@ class Home extends Component {
                 <div>
                     <h2 className="banner-title">Meeting Room Scheduler </h2>
                     <h3>Built using - React.js, Spring Boot, and MySQL</h3>
-                    <Button size="lg" color="light" className="mt-4">Learn More <FontAwesomeIcon icon="chevron-circle-right"/></Button>
+                    <Button size="lg" color="light" onClick={() => window.location.href="https://github.com/aditya10185/MeetingRoomScheduler"} className="mt-4">Learn More <FontAwesomeIcon icon="chevron-circle-right"/></Button>
                 </div>
             )
         }
