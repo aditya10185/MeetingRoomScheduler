@@ -38,7 +38,7 @@ public class EmailUtil implements IEmailUtil {
 				.buildEmail();
 				
 		MailerBuilder
-				.withSMTPServer("smtpout.asia.secureserver.net", 465, "mailer@coconutale.com", "Admin123$")
+				.withSMTPServer(<<Your server config>>)
 				.withTransportStrategy(TransportStrategy.SMTPS)
 				.buildMailer()
 				.sendMail(resp);
